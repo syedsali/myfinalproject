@@ -1,0 +1,16 @@
+{
+    "name": "app.js",
+    "css_prefix_text": "icon-",
+    "css_use_suffix": false,
+    "hinting": true,
+    "units_per_em": 1000,
+    "ascent": 850,
+    "glyphs": [
+      {
+        "uid": "7a48de2ac7ca47c78d6c279996ee6250",
+        "css": "yelp",
+        "code": 61929,
+        "src": "fontawesome"
+      }
+    ]
+  }

@@ -1,0 +1,47 @@
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+
+  @media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit]
+      width: 100%;
+
+    
+    }
+
+    p::selection {
+      background-color: gray;
+      cursor: text;
+      }
+
+    .main::first-letter{
+      color:black;
+      font-size: 25px;
+      font-weight: bold;
+
+    }
+
+  h1{
+    font-family: 'Syne Mono', monospace;
+    color: silver;
+    font-size: 50px;
+  }
+
+  h2{
+    font-family: 'Syne Mono', monospace;
+  }
+
+  h4{
+    font-family: 'Syne Mono', monospace;
+  }
+  .footer{
+    color: silver;
+
+  }
+.footer:hover {
+  background-size: 150%;
+  background-position: center ;
+}
