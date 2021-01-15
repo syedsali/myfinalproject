@@ -33,14 +33,14 @@ body {
 body section#left {
    -webkit-flex: 0 0 150px;
    flex: 0 0 150px;
-   background: url(kg_back1.png) top right no-repeat, url(kg_back3.png) top right repeat-y;
+   background: url(images/kg_back1.png) top right no-repeat, url(images/kg_back3.png) top right repeat-y;
    border-right: 2px solid rgb(41, 131, 0);
 }
 
 body section#right {
    -webkit-flex: 0 0 150px;
    flex: 0 0 150px;
-   background: url(kg_back2.png) top left no-repeat, url(kg_back4.png) top left repeat-y;
+   background: url(images/kg_back2.png) top left no-repeat, url(images/kg_back4.png) top left repeat-y;
    border-left: 2px solid rgb(41, 131, 0);
 }
 
