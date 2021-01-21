@@ -61,25 +61,43 @@
 //    this.append(fill);
 // }
 
+Event.prototype.elementX = function() {
+   var rectObject = this.target.getBoundingClientRect();
+   return this.clientX - rectObject.left;
+};
+
+// Method to return the y-coordinate of a mouse click within an element
+Event.prototype.elementY = function() {
+   var rectObject = this.target.getBoundingClientRect();
+   return this.clientY - rectObject.top;
+};
+      
+/* Method added to any DOM element that removes all child nodes of element */
+HTMLElement.prototype.removeChildren = function() {
+   while (this.firstChild) {
+      this.removeChild(this.firstChild);
+   }   
+};   
+
 window.addEventListener("load",playStampGame);
 
-functionplayStampGame(){
+function playStampGame(){
 
    //canvas object
    var drawArea=document.getElementById("canvas");
 
    
    //Tool bar buttons
-   varaddStamp = document.getElementById("addStamp");
-   varremoveStamp = document.getElementById("removeStamp");
-   varenlargeStamp = document.getElementById("enlargeStamp");
-   varshrinkStamp = document.getElementById("shrinkStamp");
-   varmoveLeft = document.getElementById("moveLeft");
-   varmoveRight = document.getElementById("moveRight");
-   varmoveUp = document.getElementById("moveUp");
-   varmoveDown = document.getElementById("moveDown");
-   varrotateRight = document.getElementById("rotateRight");
-   varrotateLeft = document.getElementById("rotateLeft");
+   var addStamp = document.getElementById("addStamp");
+   var removeStamp = document.getElementById("removeStamp");
+   var enlargeStamp = document.getElementById("enlargeStamp");
+   var shrinkStamp = document.getElementById("shrinkStamp");
+   var moveLeft = document.getElementById("moveLeft");
+   var moveRight = document.getElementById("moveRight");
+   var moveUp = document.getElementById("moveUp");
+   var moveDown = document.getElementById("moveDown");
+   var rotateRight = document.getElementById("rotateRight");
+   var rotateLeft = document.getElementById("rotateLeft");
    var lighten = document.getElementById("lighten");
    var darken = document.getElementById("darken");
 
@@ -87,34 +105,34 @@ functionplayStampGame(){
    //control button
    var shapes =document.querySelectorAll("img.controlShape");
    var sizes =document.querySelectorAll("div.controlSize");
-   var Shades =document.querySelectorAll("td.controlShade");
+   var shades =document.querySelectorAll("td.controlShade");
    var garbage =document.getElementById("garbage");
 
    // console.log(shapes[0].src);
    // console.log(sizes[0].id);
    // console.log(shades[0].id);
 
-   varmyGame=newgameObject();
-   varcurrentStamp=new stamp();
+   // var myGame= function newGameObject(){
+   // var currentStamp=new stamp();
 
    //enable disbale button
    //button disable enable
 
-            functiondisableObj(obj);{
+            function disableObj(obj){
             obj.disabled=true;
             obj.style.opacity=0.25;
             }
-            functionenableObj(obj);{
+            function enableObj(obj){
             obj.disabled=false;
             obj.style.opacity=1;
             }
-   
+         
    //event listeners for addstamp button
    addStamp.addEventListener("click",function(){
 
-      varshapSelect=false;
-      varsizeSelect=false;
-      varshadeSelect=false;
+      var shapSelect=false;
+      var sizeSelect=false;
+      var shadeSelect=false;
                for(var i=0;i<16;i++){
                   shapes[i].onclick=function(e){
                      console.log(e.target.id);
@@ -136,7 +154,7 @@ functionplayStampGame(){
 
                }
 
-               for(var i=0; i<5;i++){
+               for(var i=0; i<5; i++){
                   shades[i].onclick=function(e){
                      console.log(e.target.id);
                      currentStamp.shade=parseInt(e.target.id.match(/\d+/));
@@ -163,7 +181,7 @@ functionplayStampGame(){
       removeStamp.addEventListener("click",function(){
             drawArea.onclick=null;
             console.log(drawArea.childNodes[0]);
-            for (vari=0;i<drawArea.childNodes.lenght;i++){
+            for (var i=0;i<drawArea.childNodes.lenght;i++){
                drawArea.childNodes[i].onclick=function(e){
                   myGame.removeStamp(e.target.id);
                   drawArea.removeChild(e.target);
@@ -176,9 +194,9 @@ functionplayStampGame(){
       //event listner to modify image's size
       enlargeStamp.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             // this is the function to enlarge size of image
             canvasImages[i].onclick=function(e){
                console.log(e.target);
@@ -192,9 +210,9 @@ functionplayStampGame(){
       //reduce size
       shrinkStamp.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             // function to reduce size of image
             canvasImages[i].onclick=function(e){
                console.log(e.target);
@@ -208,9 +226,9 @@ functionplayStampGame(){
       //event listner for the img position to move up
       moveUp.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to move img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.marginTop);
@@ -224,9 +242,9 @@ functionplayStampGame(){
       //move img down
       moveDown.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to move img down
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.marginBottom);
@@ -240,9 +258,9 @@ functionplayStampGame(){
       //move img to left
       moveLeft.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to move img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.marginLeft);
@@ -256,9 +274,9 @@ functionplayStampGame(){
       //move img to right
       moveRight.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to move img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.marginRight);
@@ -272,9 +290,9 @@ functionplayStampGame(){
       //to rotate img left
       rotateLeft.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to reduce img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.transform);
@@ -294,9 +312,9 @@ functionplayStampGame(){
       //rotate right
       rotateRight.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to reduce img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.transform);
@@ -316,9 +334,9 @@ functionplayStampGame(){
       //to change shade lighter
       lighten.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to move img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.opacity);
@@ -330,9 +348,9 @@ functionplayStampGame(){
       //to chage darker shade
       darken.addEventListener("click",function(){
          drawArea.onclick=null;
-         varcanvasImages=document.querySelectorAll("img.canvas");
+         var canvasImages=document.querySelectorAll("img.canvas");
          console.log(canvasImages);
-         for (vari=0;i<canvasImages.lenght;i++){
+         for (var i=0;i<canvasImages.lenght;i++){
             //fuction to move img
             canvasImages[i].onclick=function(e){
                console.log(e.target.style.opacity);
@@ -347,11 +365,11 @@ functionplayStampGame(){
       });
 
       //place image method without canvas
-      functionputImage(stamp, x, y);{
+      function putImage(stamp, x, y){
          console.log(x, y);
-         varimgurl="kg_"+stamp.shape+".png";
-         varopc=stamp.shade/100;
-         varsz;
+         var imgurl="kg_"+stamp.shape+".png";
+         var opc=stamp.shade/100;
+         var sz;
          if(stamp.size===0){
             varsz=80;
          }
@@ -374,11 +392,11 @@ functionplayStampGame(){
 
       //this os to store the object of the game
 
-      functiongameObject();{
+      function gameObject() {
                this.stamp=newArry();
-               varcurrentControl=null;
-               varcurrenttool=null;
-               varstampcount=0;
+               var currentControl=null;
+               var currenttool=null;
+               var stampcount=0;
                this.addStamp=function(stampobj){
                   this.stamps[stampcount]=new stamp();
                   this.stamps[stampcount].shape =stampobj.shape;
@@ -397,22 +415,5 @@ functionplayStampGame(){
 }
 
 
-Event.prototype.elementX = function() {
-   var rectObject = this.target.getBoundingClientRect();
-   return this.clientX - rectObject.left;
-};
-
-// Method to return the y-coordinate of a mouse click within an element
-Event.prototype.elementY = function() {
-   var rectObject = this.target.getBoundingClientRect();
-   return this.clientY - rectObject.top;
-};
-      
-/* Method added to any DOM element that removes all child nodes of element */
-HTMLElement.prototype.removeChildren = function() {
-   while (this.firstChild) {
-      this.removeChild(this.firstChild);
-   }   
-};   
 
 
